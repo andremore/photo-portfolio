@@ -1,0 +1,23 @@
+form {
+    @apply grid max-w-sm mx-auto py-10 bg-opacity-25 bg-slate-900 px-10 rounded-xl;
+}
+
+form label {
+    @apply text-left text-gray-300;
+}
+
+form input {
+    @apply rounded-md bg-slate-500 px-1 text-gray-50;
+}
+
+form select {
+    @apply rounded-md bg-slate-500 px-1 text-gray-50 py-1;
+}
+
+form > button:last-child {
+    @apply bg-green-400 text-gray-800 rounded-md mt-3 py-2;
+}
+
+form > button:last-child:hover {
+    @apply bg-slate-700 text-gray-300;
+}
