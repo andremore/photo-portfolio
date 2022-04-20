@@ -11,11 +11,7 @@ export const CreateProject = () => {
 
     // Show | Hide 'CREATE NEW' Form
     const viewData = () => {
-        if (showForm) {
-            setFormStatus(false);
-        } else {
-            setFormStatus(true);
-        }
+        setFormStatus(!showForm);
     };
 
     // Input Handlers
@@ -43,8 +39,6 @@ export const CreateProject = () => {
             })
             .then((res) => console.log('POSTING DATA'))
             .catch((err) => console.log(err));
-
-        window.location.reload(true);
     };
 
     return (

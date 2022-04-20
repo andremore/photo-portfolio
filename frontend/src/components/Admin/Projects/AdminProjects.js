@@ -1,9 +1,10 @@
 import './styles/Projects.css';
 import { useState, useEffect } from 'react';
-import { CreateProject } from './CreateProject';
 import { api } from '../Api';
+import { CreateProject } from './CreateProject';
+// import { DeleteProject } from "./DeleteProject";
 
-const Projects = (props) => {
+const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [putTitle, setPutTitle] = useState('');
     const [putCategory, setPutCategory] = useState('PHOTO');
@@ -28,16 +29,14 @@ const Projects = (props) => {
             }
         };
 
-        fetchProjects();
-    }, []);
+        return () => {
+            fetchProjects()
+        }
+    }, [projects]);
 
     // Show | Hide 'Settings' Form
     const viewData = () => {
-        if (showForm) {
-            setFormStatus(false);
-        } else {
-            setFormStatus(true);
-        }
+        setFormStatus(!showForm);
     };
 
     // Input Handlers
@@ -65,8 +64,6 @@ const Projects = (props) => {
             })
             .then((res) => console.log('UPDATING DATA'))
             .catch((err) => console.log(err));
-
-        window.location.reload(true);
     };
 
     // 'DELETE' Request Handler
@@ -76,17 +73,6 @@ const Projects = (props) => {
         await api
             .delete(`/project/${id}`)
             .then((res) => console.log('DELETING DATA'));
-
-        window.location.reload(true);
-    };
-
-    // Create project handler
-    const saveProjectDataHandler = (enteredProjectData) => {
-        const projectData = {
-            ...enteredProjectData,
-        };
-
-        props.onAddProject(projectData);
     };
 
     return (
@@ -171,7 +157,7 @@ const Projects = (props) => {
                     </div>
                 ))}
             </section>
-            <CreateProject onSaveProjectDataHandler={saveProjectDataHandler} />
+            <CreateProject />
         </div>
     );
 };
