@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './styles/CreateProject.css';
 import { api } from '../Api';
 
-export const CreateProject = () => {
+export const AdminCreateProject = () => {
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredCategory, setEnteredCategory] = useState('PHOTO');
     const [enteredDescription, setEnteredDescription] = useState('');

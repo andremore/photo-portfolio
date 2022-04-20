@@ -1,10 +1,9 @@
 import './styles/Projects.css';
 import { useState, useEffect } from 'react';
 import { api } from '../Api';
-import { CreateProject } from './CreateProject';
-// import { DeleteProject } from "./DeleteProject";
+import { AdminCreateProject } from './AdminCreateProject';
 
-const Projects = () => {
+const AdminProjects = () => {
     const [projects, setProjects] = useState([]);
     const [putTitle, setPutTitle] = useState('');
     const [putCategory, setPutCategory] = useState('PHOTO');
@@ -30,8 +29,8 @@ const Projects = () => {
         };
 
         return () => {
-            fetchProjects()
-        }
+            fetchProjects();
+        };
     }, [projects]);
 
     // Show | Hide 'Settings' Form
@@ -77,7 +76,7 @@ const Projects = () => {
 
     return (
         <div>
-            {/* Projects grid */}
+            {/* AdminProjects grid */}
             <section>
                 {projects.map((project) => (
                     <div>
@@ -157,9 +156,9 @@ const Projects = () => {
                     </div>
                 ))}
             </section>
-            <CreateProject />
+            <AdminCreateProject />
         </div>
     );
 };
 
-export default Projects;
+export default AdminProjects;

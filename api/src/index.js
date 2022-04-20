@@ -22,11 +22,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', (req, res, next) => {
-    return res.json('Hello');
-});
-
-// Projects
+// AdminProjects
 app.get('/projects', async (req, res, next) => {
     const projects = await prisma.project.findMany();
     res.json(projects);
@@ -81,7 +77,7 @@ app.delete(`/project/:id`, async (req, res, next) => {
 });
 
 app.put(`/project/:id`, async (req, res) => {
-    const { title, description, category, photos, videos, projects } = req.body;
+    const { title, description, category, photos, videos } = req.body;
     const { id } = req.params;
     const project = await prisma.project.update({
         where: { id: Number(id) },
