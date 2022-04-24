@@ -1,3 +1,37 @@
 body {
     background-color: #282c34;
 }
+
+/* Container */
+main {
+    @apply container col-start-3 col-end-12;
+}
+
+/* Header */
+header {
+    @apply flex mx-auto justify-end;
+}
+
+header > div {
+    @apply flex align-middle mr-4;
+}
+
+/* Search input */
+header > div > input {
+    @apply rounded-sm px-2 w-40;
+}
+
+/* Create new button */
+header > button {
+    @apply text-gray-100 mr-5;
+}
+
+/* Table & Grid buttons */
+header > box-icon {
+    @apply cursor-pointer;
+}
+
+/* Table & grid components container */
+main > div {
+    @apply container;
+}

@@ -1,0 +1,32 @@
+#projectsGrid {
+    @apply grid grid-cols-3 container;
+}
+
+/* Project */
+#projectsGrid > div {
+    @apply bg-opacity-25 bg-slate-900 m-2 rounded-lg;
+}
+
+#projectsGrid > div > div {
+    @apply p-5;
+}
+
+/* Title */
+#projectsGrid > div > div > h1 {
+    @apply text-2xl font-bold tracking-tight text-gray-100;
+}
+
+/* Category */
+#projectsGrid > div > div > h3 {
+    @apply mb-2 text-gray-200 font-medium text-sm;
+}
+
+/* Description */
+#projectsGrid > div > div > p {
+    @apply mb-3 font-normal text-gray-300;
+}
+
+/* View project button */
+#projectsGrid > div > div > button {
+    @apply cursor-pointer inline-flex items-center py-2 px-3 text-sm font-medium text-center text-gray-800 bg-green-400 rounded-lg;
+}

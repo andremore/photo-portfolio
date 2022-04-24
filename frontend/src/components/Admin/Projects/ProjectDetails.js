@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './styles/ProjectDetails.css';
 
 export const ProjectDetails = () => {
     const [project, setProject] = useState([]);
@@ -83,38 +84,30 @@ export const ProjectDetails = () => {
     };
 
     return (
-        <section className="bg-opacity-25 bg-slate-900 text-gray-100 mx-auto col-start-4 col-end-12 w-full max-w-screen">
+        <section id="projectDetails">
             {/* Edit & Delete Buttons */}
-            <div className="flex justify-end">
-                <button
-                    className="bg-blue-500 px-6 py-3"
-                    onClick={showFormHandler}
-                >
-                    Edit
-                </button>
-                <button
-                    onClick={() => deleteProjectHandler(project.id)}
-                    className="bg-red-500 px-6 py-3"
-                >
+            <div>
+                <button onClick={showFormHandler}>Edit</button>
+                <button onClick={() => deleteProjectHandler(project.id)}>
                     Delete
                 </button>
             </div>
             {/* Project Details */}
-            <span className="flex">
+            <span>
                 Title:
-                <h1 className="text-2xl font-bold">{project.title}</h1>
+                <h1>{project.title}</h1>
             </span>
-            <span className="flex">
+            <span>
                 Category:
-                <h1 className="text-2xl font-bold">{project.category}</h1>
+                <h1>{project.category}</h1>
             </span>
-            <span className="flex">
+            <span>
                 Description:
-                <h1 className="text-2xl font-bold">{project.description}</h1>
+                <h1>{project.description}</h1>
             </span>
-            <span className="flex">
+            <span>
                 State:
-                <h1 className="text-2xl font-bold">{project.state}</h1>
+                <h1>{project.state}</h1>
             </span>
             {/* <img src={`${photos}`} alt="Project content"></img> */}
             {/* Update Form */}

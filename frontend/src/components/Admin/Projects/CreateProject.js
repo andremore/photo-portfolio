@@ -55,7 +55,6 @@ export const CreateProject = () => {
 
     return (
         <>
-            <Navbar />
             {/* Create Button */}
             <form
                 id="form"

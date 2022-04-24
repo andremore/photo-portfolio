@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProjectsTable } from '../Projects/ProjectsTable';
 import { ProjectsGrid } from '../Projects/ProjectsGrid';
 import 'boxicons';
+import './styles/Dashboard.css';
 
 export const Dashboard = () => {
     const [projectsGrid, setProjectsGrid] = useState(false);
@@ -27,25 +28,19 @@ export const Dashboard = () => {
 
     return (
         <>
-            <main className="container col-start-3 col-end-12">
+            <main>
                 {/* Header */}
-                <header className="flex mx-auto justify-end">
+                <header>
                     {/* Search */}
-                    <div className="flex align-middle mr-4">
+                    <div>
                         <box-icon name="search" color="#FFFFFF"></box-icon>
                         <input
                             type="search"
                             placeholder="Search projects"
-                            className="rounded-sm px-2 w-40"
                         ></input>
                     </div>
                     {/* Create Project */}
-                    <button
-                        className="text-gray-100 mr-5"
-                        onClick={createProjectHandler}
-                    >
-                        Create new
-                    </button>
+                    <button onClick={createProjectHandler}>Create new</button>
                     {/* Change view to grid or table */}
                     <box-icon
                         name="table"
@@ -59,7 +54,7 @@ export const Dashboard = () => {
                     ></box-icon>
                 </header>
                 {/* Projects table & grid components */}
-                <div className="container">
+                <div>
                     {projectsTable ? <ProjectsTable /> : null}
                     {projectsGrid ? <ProjectsGrid /> : null}
                 </div>

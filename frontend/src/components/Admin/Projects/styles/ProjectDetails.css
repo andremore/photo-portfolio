@@ -1,0 +1,27 @@
+#projectDetails {
+    @apply bg-opacity-25 bg-slate-900 text-gray-100 mx-auto col-start-4 col-end-12 w-full;
+}
+
+/* Edit & Delete buttons container */
+#projectDetails > div {
+    @apply flex justify-end;
+}
+
+/* Edit button */
+#projectDetails > div > button:first-child {
+    @apply bg-blue-500 px-6 py-3;
+}
+
+/* Delete button */
+#projectDetails > div > button:last-child {
+    @apply bg-red-500 px-6 py-3;
+}
+
+/* Details 'labels' */
+#projectDetails span {
+    @apply flex;
+}
+
+#projectDetails h1 {
+    @apply text-2xl font-bold;
+}

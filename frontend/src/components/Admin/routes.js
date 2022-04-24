@@ -3,7 +3,6 @@ import { Dashboard } from './Dashboard/Dashboard';
 import { CreateProject } from './Projects/CreateProject';
 import { ProjectDetails } from './Projects/ProjectDetails';
 import { Navbar } from './Navigation/Navbar';
-import './Dashboard/styles/Dashboard.css';
 
 export const AdminRoutes = () => {
     return (

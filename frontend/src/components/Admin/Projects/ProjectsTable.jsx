@@ -2,6 +2,7 @@ import useFetch from '../../../Hooks/useFetch/useFetch';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'boxicons';
+import './styles/ProjectsTable.css';
 
 export const ProjectsTable = (props) => {
     const navigate = useNavigate();
@@ -20,10 +21,10 @@ export const ProjectsTable = (props) => {
     if (error) console.log(error);
 
     return (
-        <section className="grid grid-cols-1" id="projectsTable">
-            <table className="bg-opacity-25 bg-slate-900">
+        <section id="projectsTable">
+            <table>
                 <thead>
-                    <tr className="text-gray-100 border-b-2 border-gray-500">
+                    <tr>
                         <th>id</th>
                         <th>Title</th>
                         <th>Category</th>
@@ -35,7 +36,6 @@ export const ProjectsTable = (props) => {
                     {/* Project Details */}
                     {data.map((project) => (
                         <tr
-                            className="text-gray-100 cursor-pointer hover:bg-slate-700 border-b-2"
                             onClick={() =>
                                 viewProjectHandler(project.id, project.title)
                             }
