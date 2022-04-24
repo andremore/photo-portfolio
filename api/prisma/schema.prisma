@@ -17,22 +17,20 @@ model Project {
   description String?
   state State @default(SAVE)
   category Category @default(PHOTO)
-  photos Photo[] @relation(references: [id])
-  videos Video[] @relation(references: [id])
+  photos Photo[]
+  videos Video[]
 }
 
 model Photo {
   id Int @default(autoincrement()) @id
-  name String
   photo String
-  projects Project[] @relation(references: [id])
+  projects Project[]
 }
 
 model Video {
   id Int @default(autoincrement()) @id
-  name String
   video String
-  projects Project[] @relation(references: [id])
+  projects Project[]
 }
 
 enum Category {

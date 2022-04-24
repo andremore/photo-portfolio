@@ -1,11 +1,34 @@
+const { PrismaClient } = require('@prisma/client');
+const { v4: uuid } = require('uuid');
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
-
 const prisma = new PrismaClient();
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../../frontend/public/media');
+    },
+    filename: function (req, file, cb) {
+        const filename = uuid() + '.' + file.mimetype.split('/')[1];
+        cb(null, filename);
+    },
+});
+
+const upload = multer({ storage: storage });
+
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ extended: false, limit: '50mb' }));
+app.use(
+    express.urlencoded({
+        limit: '50mb',
+        extended: false,
+        parameterLimit: 50000,
+    })
+);
 
 app.use(
     cors({
@@ -14,7 +37,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+    res.header('Access-Control-Allow-Origin', '*');
     res.header(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept'
@@ -24,43 +47,44 @@ app.use(function (req, res, next) {
 
 // AdminProjects
 app.get('/projects', async (req, res, next) => {
-    const projects = await prisma.project.findMany();
+    const projects = await prisma.project.findMany({
+        include: {
+            photos: true,
+        },
+    });
+
     res.json(projects);
 });
 
-app.post('/projects', async (req, res, next) => {
-    const { title, description, category, photos, videos, projects } = req.body;
+app.post('/projects', upload.array('photo'), async (req, res, next) => {
+    const { title, description, category, state, photos, video } = req.body;
 
-    const projectData = projects
-        ? projectData.map((project) => {
-              return {
-                  title: project.title,
-                  description: project.description,
-                  category: project.category,
-                  state: project.state,
-                  photos: project.photos,
-                  videos: project.videos,
-              };
-          })
-        : [];
-
-    const result = await prisma.project.create({
+    const project = await prisma.project.create({
         data: {
             title,
             description,
             category,
-            photos,
-            videos,
+            state,
+            photos: {
+                create: [{ photo: req.files[0].path }],
+            },
+            // videos: {
+            //     create: [{ video: req.files[1].path }],
+            // },
         },
     });
 
-    res.json(result);
+    res.json(project);
 });
 
 app.get(`/project/:id`, async (req, res, next) => {
     const { id } = req.params;
+
     const project = await prisma.project.findUnique({
         where: { id: Number(id) },
+        include: {
+            photos: true,
+        },
     });
 
     res.json(project);
