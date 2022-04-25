@@ -1,4 +1,4 @@
-import useFetch from '../../../Hooks/useFetch/useFetch';
+import useFetch from '../../../hooks/useFetch/useFetch';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import 'boxicons';
@@ -8,7 +8,7 @@ export const ProjectsGrid = () => {
     const navigate = useNavigate();
 
     const viewProjectHandler = useCallback(
-        (id, title) => navigate(`/admin/project/${title}`),
+        (id, title) => navigate(`/admin/project/${id}`),
         [navigate]
     );
 

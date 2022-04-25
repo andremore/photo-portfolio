@@ -1,15 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/ProjectDetails.css';
 
 export const ProjectDetails = () => {
     const [project, setProject] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [photos, setPhotos] = useState('');
+
+    // Get project id through url parameters
+    const projectId = useParams().id;
+
+    // Navigator upon deletion
     const navigate = useNavigate();
 
+    // 'UPDATE' Project details
     const [putTitle, setPutTitle] = useState('');
     const [putCategory, setPutCategory] = useState('PHOTO');
     const [putDescription, setPutDescription] = useState('');
@@ -41,10 +45,8 @@ export const ProjectDetails = () => {
 
     // 'GET' Project details
     useEffect(() => {
-        setLoading(true);
-
         axios
-            .get(`http://localhost:8000/project/31`)
+            .get(`http://localhost:8000/project/${projectId}`)
             .then((res) => {
                 setProject(res.data);
 
@@ -57,15 +59,13 @@ export const ProjectDetails = () => {
                 setPhotos('../../../../public/media/' + photoPath);
             })
             .catch((err) => {
-                setError(err);
-            })
-            .finally(() => {
-                setLoading(false);
+                console.error(err);
             });
-    }, [photos]);
+    }, [photos, projectId]);
 
     // 'DELETE' Project
     const deleteProjectHandler = async (id) => {
+        console.log(id);
         await axios
             .delete(`http://localhost:8000/project/${id}`)
             .then((res) => console.log(id));
@@ -74,8 +74,8 @@ export const ProjectDetails = () => {
     };
 
     // 'UPDATE' Project
-    const updateProjectHandler = async (e) => {
-        await axios.put('http://localhost:8000/project/31', {
+    const updateProjectHandler = async (id) => {
+        await axios.put(`http://localhost:8000/project/${id}`, {
             title: putTitle,
             category: putCategory,
             description: putDescription,
@@ -87,7 +87,9 @@ export const ProjectDetails = () => {
         <section id="projectDetails">
             {/* Edit & Delete Buttons */}
             <div>
-                <button onClick={showFormHandler}>Edit</button>
+                <button onClick={() => showFormHandler(project.id)}>
+                    Edit
+                </button>
                 <button onClick={() => deleteProjectHandler(project.id)}>
                     Delete
                 </button>
@@ -112,7 +114,7 @@ export const ProjectDetails = () => {
             {/* <img src={`${photos}`} alt="Project content"></img> */}
             {/* Update Form */}
             {showForm && (
-                <form onSubmit={(e) => updateProjectHandler(e)}>
+                <form onSubmit={() => updateProjectHandler(project.id)}>
                     <input
                         type="text"
                         placeholder="Title"

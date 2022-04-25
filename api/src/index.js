@@ -2,23 +2,27 @@ const { PrismaClient } = require('@prisma/client');
 const { v4: uuid } = require('uuid');
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
 const prisma = new PrismaClient();
 
-const multer = require('multer');
+const mime = require('mime-types');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, '../../frontend/public/media');
     },
     filename: function (req, file, cb) {
-        const filename = uuid() + '.' + file.mimetype.split('/')[1];
-        cb(null, filename);
+        const fileName = uuid() + '.' + mime.extension(file.mimetype);
+
+        cb(null, fileName);
     },
 });
 
 const upload = multer({ storage: storage });
 
 const app = express();
+
+// ! app.use(express.static('public'));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.json({ extended: false, limit: '50mb' }));

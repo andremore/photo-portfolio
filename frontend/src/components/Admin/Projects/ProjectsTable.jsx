@@ -1,4 +1,4 @@
-import useFetch from '../../../Hooks/useFetch/useFetch';
+import useFetch from '../../../hooks/useFetch/useFetch';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'boxicons';
@@ -8,7 +8,7 @@ export const ProjectsTable = (props) => {
     const navigate = useNavigate();
 
     const viewProjectHandler = useCallback(
-        (id, title) => navigate(`/admin/project/${title}`),
+        (id, title) => navigate(`/admin/project/${id}`),
         [navigate]
     );
 
@@ -39,6 +39,7 @@ export const ProjectsTable = (props) => {
                             onClick={() =>
                                 viewProjectHandler(project.id, project.title)
                             }
+                            lucko={project.id}
                             key={project.id}
                         >
                             <th>{project.id}</th>
