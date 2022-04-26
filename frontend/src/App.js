@@ -1,9 +1,9 @@
-import { AdminRoutes } from './components/Admin/routes';
+import { Admin } from './components/Admin/index';
 
 const App = () => {
     return (
         <>
-            <AdminRoutes />
+            <Admin />
         </>
     );
 };

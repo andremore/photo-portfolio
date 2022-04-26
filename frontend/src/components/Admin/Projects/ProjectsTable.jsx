@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import 'boxicons';
 import './styles/ProjectsTable.css';
 
-export const ProjectsTable = (props) => {
+export const ProjectsTable = () => {
     const navigate = useNavigate();
 
     const viewProjectHandler = useCallback(
@@ -21,8 +21,8 @@ export const ProjectsTable = (props) => {
     if (error) console.log(error);
 
     return (
-        <section id="projectsTable">
-            <table>
+        <section>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -30,6 +30,7 @@ export const ProjectsTable = (props) => {
                         <th>Category</th>
                         <th>Description</th>
                         <th>State</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,8 +40,8 @@ export const ProjectsTable = (props) => {
                             onClick={() =>
                                 viewProjectHandler(project.id, project.title)
                             }
-                            lucko={project.id}
                             key={project.id}
+                            className="hover hover:cursor-pointer"
                         >
                             <th>{project.id}</th>
                             <th>{project.title}</th>
@@ -48,7 +49,7 @@ export const ProjectsTable = (props) => {
                             <th>{project.description}</th>
                             <th>{project.state}</th>
                             <th>
-                                <box-icon name="cog" color="#4ADE80"></box-icon>
+                                <box-icon name="cog" color="#F28C18"></box-icon>
                             </th>
                         </tr>
                     ))}
