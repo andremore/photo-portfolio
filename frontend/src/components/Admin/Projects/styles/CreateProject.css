@@ -1,23 +1,24 @@
-form {
-    @apply grid max-w-sm mx-auto py-10 bg-opacity-25 bg-slate-900 px-10 rounded-xl;
+section {
+    @apply container col-start-5 col-end-12;
+}
+
+form div {
+    @apply form-control mt-2;
 }
 
 form label {
-    @apply text-left text-gray-300;
+    @apply input-group;
 }
 
 form input {
-    @apply rounded-md bg-slate-500 px-1 text-gray-50;
+    @apply input input-bordered w-full;
 }
 
 form select {
-    @apply rounded-md bg-slate-500 px-1 text-gray-50 py-1;
+    @apply select select-bordered w-auto select-sm;
 }
 
-form > button:last-child {
-    @apply bg-green-400 text-gray-800 rounded-md mt-3 py-2;
-}
-
-form > button:last-child:hover {
-    @apply bg-slate-700 text-gray-300;
+/* TODO: fix default tailwind bg-transparent */
+form > button {
+    @apply btn btn-primary btn-xl bg-primary w-full !important;
 }

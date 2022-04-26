@@ -1,0 +1,19 @@
+/* Side menu container */
+aside {
+    @apply drawer drawer-mobile col-start-1 col-end-4;
+}
+
+/* Open menu container */
+aside > div {
+    @apply drawer-content flex flex-col items-center justify-center;
+}
+
+/* Open menu button */
+aside > div > label {
+    @apply btn btn-primary drawer-button lg:hidden;
+}
+
+/* Menu items container */
+aside > nav > ul {
+    @apply menu p-4 overflow-y-auto w-64 text-base-content;
+}

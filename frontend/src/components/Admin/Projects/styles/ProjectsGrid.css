@@ -4,7 +4,7 @@
 
 /* Project */
 #projectsGrid > div {
-    @apply bg-opacity-25 bg-slate-900 m-2 rounded-lg;
+    @apply bg-base-100 m-2 rounded-lg;
 }
 
 #projectsGrid > div > div {
@@ -13,7 +13,7 @@
 
 /* Title */
 #projectsGrid > div > div > h1 {
-    @apply text-2xl font-bold tracking-tight text-gray-100;
+    @apply text-2xl font-bold tracking-tight overflow-hidden text-gray-200;
 }
 
 /* Category */
@@ -23,10 +23,10 @@
 
 /* Description */
 #projectsGrid > div > div > p {
-    @apply mb-3 font-normal text-gray-300;
+    @apply mb-3 font-normal text-gray-200 overflow-hidden;
 }
 
 /* View project button */
 #projectsGrid > div > div > button {
-    @apply cursor-pointer inline-flex items-center py-2 px-3 text-sm font-medium text-center text-gray-800 bg-green-400 rounded-lg;
+    @apply cursor-pointer inline-flex items-center py-2 px-3 text-sm font-medium text-center rounded-lg btn btn-primary;
 }

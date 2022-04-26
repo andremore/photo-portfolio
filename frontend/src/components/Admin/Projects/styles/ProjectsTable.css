@@ -1,18 +1,4 @@
-#projectsTable {
-    @apply grid grid-cols-1;
-}
-
 /* Table */
 #projectsTable > table {
-    @apply bg-opacity-25 bg-slate-900;
-}
-
-/* Header  */
-#projectsTable > table > thead > tr {
-    @apply text-gray-100 border-b-2 border-gray-500;
-}
-
-/* Projects */
-#projectsTable > table > tbody > tr {
-    @apply text-gray-100 cursor-pointer hover:bg-slate-700 border-b-2;
+    @apply w-full;
 }

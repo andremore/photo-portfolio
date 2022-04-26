@@ -1,10 +1,10 @@
 body {
-    background-color: #282c34;
+    @apply bg-primary-content;
 }
 
 /* Container */
 main {
-    @apply container col-start-3 col-end-12;
+    @apply container col-start-4 col-end-12;
 }
 
 /* Header */
@@ -12,26 +12,27 @@ header {
     @apply flex mx-auto justify-end;
 }
 
-header > div {
-    @apply flex align-middle mr-4;
+/* Buttons & Inputs container */
+header > div > div {
+    @apply input-group input-group-sm;
+}
+
+/* Search button */
+header > div > div > button {
+    @apply btn btn-square btn-sm;
 }
 
 /* Search input */
-header > div > input {
-    @apply rounded-sm px-2 w-40;
+header > div > div > input {
+    @apply input input-bordered input-sm;
 }
 
-/* Create new button */
-header > button {
-    @apply text-gray-100 mr-5;
+/* Create & Change view container */
+header > div:nth-child(2) {
+    @apply btn-group;
 }
 
 /* Table & Grid buttons */
 header > box-icon {
     @apply cursor-pointer;
-}
-
-/* Table & grid components container */
-main > div {
-    @apply container;
 }

@@ -1,27 +1,58 @@
 #projectDetails {
-    @apply bg-opacity-25 bg-slate-900 text-gray-100 mx-auto col-start-4 col-end-12 w-full;
+    @apply bg-none mx-auto col-start-4 col-end-12 w-full mt-5;
 }
 
 /* Edit & Delete buttons container */
 #projectDetails > div {
-    @apply flex justify-end;
+    @apply flex justify-end btn-group;
 }
 
-/* Edit button */
-#projectDetails > div > button:first-child {
-    @apply bg-blue-500 px-6 py-3;
+/* Deletion modal */
+#projectDetails > div > div > div {
+    @apply modal-box;
 }
 
-/* Delete button */
-#projectDetails > div > button:last-child {
-    @apply bg-red-500 px-6 py-3;
+/* Deletion question */
+#projectDetails > div > div > div > h3 {
+    @apply font-bold text-lg;
 }
 
-/* Details 'labels' */
-#projectDetails span {
-    @apply flex;
+/* Deletion emphasis */
+#projectDetails > div > div > div > p {
+    @apply py-4;
 }
 
-#projectDetails h1 {
-    @apply text-2xl font-bold;
+/* Confirm or cancel deletion container */
+#projectDetails > div > div > div > div {
+    @apply modal-action;
+}
+
+/* Confirm */
+#projectDetails > div > div > div > div > label:first-child {
+    @apply btn btn-outline btn-sm hover:btn-error;
+}
+
+/* Cancel */
+#projectDetails > div > div > div > div > label:last-child {
+    @apply btn btn-outline btn-sm;
+}
+
+/* Project details container */
+#projectDetails > section {
+    @apply grid grid-rows-4 px-10 py-7 bg-info-content rounded-xl mt-20;
+}
+
+/* Fields */
+#projectDetails > section small {
+    @apply text-primary-content;
+}
+
+/* Values */
+#projectDetails > section h1 {
+    @apply text-2xl font-bold text-primary-content;
+}
+
+/* Edit project form */
+#projectDetails form {
+    @apply mt-10;
 }
