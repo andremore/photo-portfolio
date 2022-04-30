@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 const prisma = new PrismaClient();
-
+const transport = require('./configs/email.js');
 const mime = require('mime-types');
 
 const storage = multer.diskStorage({
@@ -148,6 +148,25 @@ app.get(`/photo/:id`, async (req, res, next) => {
     });
 
     res.json(photo);
+});
+
+app.post('/contact', (req, res, next) => {
+    const { name, email, subject, message } = req.body;
+
+    const mailOptions = {
+        from: email,
+        to: email,
+        subject: subject,
+        text: 'Name: ' + name + ' ' + 'Message: ' + message,
+    };
+
+    transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Message sent: %s', info.messageId);
+        }
+    });
 });
 
 const server = app.listen(8000, () =>

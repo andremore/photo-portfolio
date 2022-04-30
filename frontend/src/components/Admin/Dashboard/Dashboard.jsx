@@ -67,8 +67,8 @@ export const Dashboard = () => {
             </header>
             {/* Projects table & grid components */}
             <div>
-                {projectsTable ? <ProjectsTable /> : null}
-                {projectsGrid ? <ProjectsGrid /> : null}
+                {projectsTable && <ProjectsTable />}
+                {projectsGrid && <ProjectsGrid />}
             </div>
         </main>
     );
