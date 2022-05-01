@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProjectsTable } from '../Projects/ProjectsTable';
 import { ProjectsGrid } from '../Projects/ProjectsGrid';
+import { gsap } from 'gsap';
 import 'boxicons';
 import './styles/Dashboard.css';
 
@@ -11,6 +12,9 @@ export const Dashboard = () => {
 
     const navigate = useNavigate();
 
+    const gridRef = useRef();
+    const tableRef = useRef();
+
     const createProjectHandler = useCallback(
         () => navigate(`/admin/create-project`),
         [navigate]
@@ -19,11 +23,30 @@ export const Dashboard = () => {
     const clickGridHandler = () => {
         setProjectsTable(false);
         setProjectsGrid(true);
+
+        const gridButton = document.querySelector('#gridButton');
+
+        // Change button to outlined or filled
+        if (gridButton.getAttribute('type') === 'regular') {
+            gridButton.setAttribute('type', 'solid');
+        } else {
+            gridButton.setAttribute('type', 'regular');
+        }
+
+        gsap.to(gridRef.current, {
+            rotation: '+=360',
+            duration: 0.155,
+        });
     };
 
     const clickTableHandler = () => {
         setProjectsGrid(false);
         setProjectsTable(true);
+
+        gsap.to(tableRef.current, {
+            rotation: '+=360',
+            duration: 0.155,
+        });
     };
 
     return (
@@ -44,7 +67,7 @@ export const Dashboard = () => {
                                 <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
-                        <input type="text" placeholder="Search…" className="" />
+                        <input type="text" placeholder="Search…" />
                     </div>
                 </div>
                 {/* Create & Change view container */}
@@ -58,10 +81,22 @@ export const Dashboard = () => {
                     </button>
                     {/* Change view to grid or table */}
                     <button className="btn btn-sm" onClick={clickTableHandler}>
-                        <box-icon name="table" color="#F28C18"></box-icon>
+                        <box-icon
+                            id="tableButton"
+                            name="table"
+                            type="regular"
+                            color="#F28C18"
+                            ref={tableRef}
+                        ></box-icon>
                     </button>
                     <button className="btn btn-sm" onClick={clickGridHandler}>
-                        <box-icon name="grid-alt" color="#F28C18"></box-icon>
+                        <box-icon
+                            id="gridButton"
+                            name="grid-alt"
+                            type="regular"
+                            color="#F28C18"
+                            ref={gridRef}
+                        ></box-icon>
                     </button>
                 </div>
             </header>
