@@ -67,7 +67,7 @@ export const ProjectDetails = () => {
     const deleteProjectHandler = async (id) => {
         await axios
             .delete(`http://localhost:8000/project/${id}`)
-            .then((res) => console.log(id));
+            .then(() => console.log(id));
 
         navigate('/admin/projects');
     };
@@ -105,7 +105,7 @@ export const ProjectDetails = () => {
                 <div className="modal">
                     <div>
                         <h3>Are you sure you want to delete this project?</h3>
-                        <p>You're about to delete a project...</p>
+                        <p>You{"'"}re about to delete a project...</p>
                         <div>
                             <label
                                 htmlFor="deleteModal"

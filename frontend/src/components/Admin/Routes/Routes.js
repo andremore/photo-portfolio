@@ -8,16 +8,32 @@ export const AdminRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="admin" element={[<Navbar />, <Dashboard />]}>
+                <Route
+                    path="admin"
+                    element={[
+                        <Navbar key="main-navbar" />,
+                        <Dashboard key="dashboard" />,
+                    ]}
+                >
                     <Route path="projects" element={<Dashboard />} />
                 </Route>
                 <Route
                     path="admin/create-project"
-                    element={[<Navbar />, <CreateProject />]}
+                    element={[
+                        <Navbar key="create-project-navbar" />,
+                        <CreateProject key="create-project" />,
+                    ]}
                 />
                 <Route
                     path="admin/project/:id"
-                    element={[<Navbar />, <ProjectDetails />]}
+                    element={[
+                        <Navbar key="project-navbar" />,
+                        <ProjectDetails key="project-details" />,
+                    ]}
+                />
+                <Route
+                    path="admin/auth"
+                    element={[<Navbar key="auth-navbar" />]}
                 />
             </Routes>
         </BrowserRouter>

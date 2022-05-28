@@ -8,6 +8,7 @@ const mime = require('mime-types');
 module.exports = (() => {
     // ! app.use(express.static('public'));
     const route = express();
+    route.use(express.json());
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {

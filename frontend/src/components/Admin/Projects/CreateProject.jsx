@@ -48,7 +48,7 @@ export const CreateProject = () => {
 
         await axios
             .post('http://localhost:8000/projects/', formData)
-            .then((res) => console.log('POSTING DATA'))
+            .then(() => console.log('POSTING DATA'))
             .catch((err) => console.log(err));
     };
 

@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 module.exports = (() => {
     const route = express();
+    route.use(express.json());
 
     // Videos
     route.get('/videos', async (req, res, next) => {

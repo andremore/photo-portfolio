@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import 'boxicons';
 import './styles/Navbar.css';
 
 export const Navbar = () => {
@@ -12,11 +13,25 @@ export const Navbar = () => {
                 <label htmlFor="sideNav" className="drawer-overlay"></label>
                 <ul>
                     <li>
-                        <Link to="/admin">Dashboard</Link>
+                        <Link to="/admin">
+                            <box-icon
+                                name="doughnut-chart"
+                                type="solid"
+                                color="#D4D4D4"
+                            ></box-icon>
+                            Dashboard
+                        </Link>
                     </li>
-                    <li>
-                        <Link to="/admin/projects">Projects</Link>
-                    </li>
+                    {/* <li>
+                        <Link to="/admin/projects">
+                            <box-icon
+                                name="hive"
+                                // type="solid"
+                                color="#FFFFFF"
+                            ></box-icon>
+                            Projects
+                        </Link>
+                    </li> */}
                 </ul>
             </nav>
         </aside>

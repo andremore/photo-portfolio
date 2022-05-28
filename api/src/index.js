@@ -2,7 +2,20 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors({ origin: '*' }));
+const projectsRoutes = require('./routes/projects');
+const contactRoutes = require('./routes/contact');
+const videosAndPhotosRoutes = require('./routes/videosAndPhotos');
+const authRoutes = require('./routes/auth');
+
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        allowedHeaders: ['content-type'],
+        credentials: true,
+    })
+);
+
+// app.use(cors({ origin: '*' }))
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -13,12 +26,13 @@ app.use(function (req, res, next) {
     next();
 });
 
-const projectsRoutes = require('./routes/projects');
-const contactRoutes = require('./routes/contact');
-const videosAndPhotosRoutes = require('./routes/videosAndPhotos');
+app.use('/', [
+    contactRoutes,
+    projectsRoutes,
+    videosAndPhotosRoutes,
+    authRoutes,
+]);
 
-app.use('/', [contactRoutes, projectsRoutes, videosAndPhotosRoutes]);
-
-const server = app.listen(8000, () =>
+app.listen(8000, () =>
     console.log(`🚀 Server ready at: http://localhost:8000`)
 );

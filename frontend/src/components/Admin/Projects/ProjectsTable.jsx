@@ -8,7 +8,7 @@ export const ProjectsTable = () => {
     const navigate = useNavigate();
 
     const viewProjectHandler = useCallback(
-        (id, title) => navigate(`/admin/project/${id}`),
+        (id) => navigate(`/admin/project/${id}`),
         [navigate]
     );
 
@@ -22,7 +22,7 @@ export const ProjectsTable = () => {
 
     return (
         <section>
-            <table className="table">
+            <table className="table mx-auto">
                 <thead>
                     <tr>
                         <th>id</th>

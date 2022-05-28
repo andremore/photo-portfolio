@@ -1,19 +1,6 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import useFetch from '../../../hooks/useFetch/useFetch';
 
-import 'boxicons';
-import './styles/ProjectsGrid.css';
-
-export const ProjectsGrid = () => {
-    const navigate = useNavigate();
-
-    const viewProjectHandler = useCallback(
-        (id) => navigate(`/admin/project/${id}`),
-        [navigate]
-    );
-
+export const Projects = () => {
     const { data, loading, error } = useFetch(
         'http://localhost:8000/projects/'
     );
@@ -23,19 +10,19 @@ export const ProjectsGrid = () => {
     if (error) console.log(error);
 
     return (
-        <section id="projectsGrid">
+        <main className="grid grid-cols-3 mx-auto gap-5">
             {data.map((project) => (
-                <div key={project.id}>
+                <div key={project.id} className="bg-secondary-focus">
                     {/* Project Details */}
                     <div>
                         <h1>{project.title}</h1>
-                        <h3>{project.category}</h3>
+                        <h1>{project.category}</h1>
                         <p>{project.description}</p>
                         {/* View Project Button */}
                         <button
-                            onClick={() =>
-                                viewProjectHandler(project.id, project.title)
-                            }
+                        // onClick={() =>
+                        //     viewProjectHandler(project.id, project.title)
+                        // }
                         >
                             View project
                             <box-icon
@@ -46,6 +33,6 @@ export const ProjectsGrid = () => {
                     </div>
                 </div>
             ))}
-        </section>
+        </main>
     );
 };

@@ -15,23 +15,23 @@ export const Dashboard = () => {
     const gridRef = useRef();
     const tableRef = useRef();
 
+    // const [enteredSearch, setEnteredSearch] = useState('');
+    // const { search } = window.location;
+    // const query = new URLSearchParams(search).get('s');
+
     const createProjectHandler = useCallback(
         () => navigate(`/admin/create-project`),
         [navigate]
     );
 
+    // const searchHandler = (e) => {
+    //     let searchFix = e.target.value.toLowerCase();
+    //     setEnteredSearch(searchFix);
+    // };
+
     const clickGridHandler = () => {
         setProjectsTable(false);
         setProjectsGrid(true);
-
-        const gridButton = document.querySelector('#gridButton');
-
-        // Change button to outlined or filled
-        if (gridButton.getAttribute('type') === 'regular') {
-            gridButton.setAttribute('type', 'solid');
-        } else {
-            gridButton.setAttribute('type', 'regular');
-        }
 
         gsap.to(gridRef.current, {
             rotation: '+=360',
@@ -67,7 +67,11 @@ export const Dashboard = () => {
                                 <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
-                        <input type="text" placeholder="Search…" />
+                        <input
+                            type="text"
+                            placeholder="Search…"
+                            // onChange={searchHandler}
+                        />
                     </div>
                 </div>
                 {/* Create & Change view container */}

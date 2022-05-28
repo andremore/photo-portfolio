@@ -10,18 +10,37 @@ export const MainAppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={[<Navbar />, <Home />, <Footer />]} />
+                <Route
+                    path="/"
+                    element={[
+                        <Navbar key="index-navbar" />,
+                        <Home key="home-page" />,
+                        <Footer key="index-footer" />,
+                    ]}
+                />
                 <Route
                     path="/about"
-                    element={[<Navbar />, <About />, <Footer />]}
+                    element={[
+                        <Navbar key="about-navbar" />,
+                        <About key="about-page" />,
+                        <Footer key="about-footer" />,
+                    ]}
                 />
                 <Route
                     path="/projects"
-                    element={[<Navbar />, <Projects />, <Footer />]}
+                    element={[
+                        <Navbar key="projects-navbar" />,
+                        <Projects key="projects-page" />,
+                        <Footer key="projects-footer" />,
+                    ]}
                 />
                 <Route
                     path="/contact"
-                    element={[<Navbar />, <Contact />, <Footer />]}
+                    element={[
+                        <Navbar key="contact-navbar" />,
+                        <Contact key="contact-page" />,
+                        <Footer key="contact-footer" />,
+                    ]}
                 />
             </Routes>
         </BrowserRouter>
