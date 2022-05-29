@@ -5,7 +5,7 @@ module.exports = {
         commonjs: true,
         es2021: true,
     },
-    extends: ['eslint:recommended', 'prettier'],
+    extends: ['eslint:recommended', 'prettier', 'jest', 'supertest'],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
