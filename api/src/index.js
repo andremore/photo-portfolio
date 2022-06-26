@@ -4,8 +4,9 @@ const app = express();
 
 const projectsRoutes = require('./routes/projects');
 const contactRoutes = require('./routes/contact');
-const videosAndPhotosRoutes = require('./routes/videosAndPhotos');
 const authRoutes = require('./routes/auth');
+
+const path = require('path');
 
 app.use(
     cors({
@@ -26,12 +27,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', [
-    contactRoutes,
-    projectsRoutes,
-    videosAndPhotosRoutes,
-    authRoutes,
-]);
+app.get('/favicon.ico', (req, res) => {
+    // Use actual relative path to your .ico file here
+    res.sendFile(path.resolve(__dirname, '../favicon.ico'));
+});
+
+app.use('/', [contactRoutes, projectsRoutes, authRoutes]);
 
 app.listen(8000, () =>
     console.log(`🚀 Server ready at: http://localhost:8000`)

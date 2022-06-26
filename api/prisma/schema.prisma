@@ -2,54 +2,49 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model Project {
-  id Int @default(autoincrement()) @id
-  createdAt DateTime @default(now())
-  title String
-  description String?
-  state State @default(SAVE)
-  category Category @default(PHOTO)
-  photos Photo[]
-  videos Video[]
+    id Int @default(autoincrement()) @id
+    createdAt DateTime @default(now())
+    title String
+    description String?
+    state State @default(SAVE)
+    category Category @default(PHOTO)
+    media Media[]
 }
 
-model Photo {
-  id Int @default(autoincrement()) @id
-  photo String
-  projects Project[]
-}
-
-model Video {
-  id Int @default(autoincrement()) @id
-  video String
-  projects Project[]
+model Media {
+    id Int @default(autoincrement()) @id
+    link String[]
+    category Category @default(PHOTO)
+    project Project[] @relation(fields: [projectId], references: [id])
+    projectId Int
 }
 
 enum Category {
-  PHOTO
-  VIDEO
-  BOTH
+    PHOTO
+    VIDEO
+    BOTH
 }
 
 enum State {
-  SAVE
-  PUBLISH
-  HIDE
-  DELETE
+    SAVE
+    PUBLISH
+    HIDE
+    DELETE
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
-  username String @unique
-  password String
-  isAdmin Boolean @default(false)
+    id Int @id @default(autoincrement())
+    email String @unique
+    username String @unique
+    password String
+    isAdmin Boolean @default(false)
 }
