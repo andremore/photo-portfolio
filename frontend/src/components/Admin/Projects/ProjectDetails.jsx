@@ -5,7 +5,7 @@ import './styles/ProjectDetails.css';
 
 export const ProjectDetails = () => {
     const [project, setProject] = useState([]);
-    const [photos, setPhotos] = useState('');
+    const [media, setMedia] = useState([]);
 
     // Get project id through url parameters
     const projectId = useParams().id;
@@ -14,29 +14,12 @@ export const ProjectDetails = () => {
     const navigate = useNavigate();
 
     // 'UPDATE' Project details
-    const [putTitle, setPutTitle] = useState('');
-    const [putCategory, setPutCategory] = useState('PHOTO');
-    const [putDescription, setPutDescription] = useState('');
-    const [putState, setPutState] = useState('SAVE');
+    const [enteredTitle, setEnteredTitle] = useState('');
+    const [enteredCategory, setEnteredCategory] = useState('PHOTO');
+    const [enteredDescription, setEnteredDescription] = useState('');
+    const [enteredState, setEnteredState] = useState('SAVE');
 
     const [showForm, setShowForm] = useState(false);
-
-    // Input Handlers
-    const titleChangeHandler = (e) => {
-        setPutTitle(e.target.value);
-    };
-
-    const categoryChangeHandler = (e) => {
-        setPutCategory(e.target.value);
-    };
-
-    const descriptionChangeHandler = (e) => {
-        setPutDescription(e.target.value);
-    };
-
-    const stateChangeHandler = (e) => {
-        setPutState(e.target.value);
-    };
 
     // Show || Hide Form
     const showFormHandler = () => {
@@ -49,19 +32,12 @@ export const ProjectDetails = () => {
             .get(`http://localhost:8000/project/${projectId}`)
             .then((res) => {
                 setProject(res.data);
-
-                let selectPhoto = res.data.photos[0].photo;
-
-                let photoPath = selectPhoto.substring(
-                    selectPhoto.indexOf('media') + 5
-                );
-
-                setPhotos('../../../../public/media/' + photoPath);
+                setMedia(res.data.media);
             })
             .catch((err) => {
                 console.error(err);
             });
-    }, [photos, projectId]);
+    }, [projectId]);
 
     // 'DELETE' Project
     const deleteProjectHandler = async (id) => {
@@ -75,10 +51,10 @@ export const ProjectDetails = () => {
     // 'UPDATE' Project
     const updateProjectHandler = async (id) => {
         await axios.put(`http://localhost:8000/project/${id}`, {
-            title: putTitle,
-            category: putCategory,
-            description: putDescription,
-            state: putState,
+            title: enteredTitle,
+            category: enteredCategory,
+            description: enteredDescription,
+            state: enteredState,
         });
     };
 
@@ -136,20 +112,32 @@ export const ProjectDetails = () => {
                     <small>State:</small>
                     <h1>{project.state}</h1>
                 </div>
-                {/* <img src={`${photos}`} alt="Project content"></img> */}
+                <div>
+                    <small>Media:</small>
+                    {media.map((media) => (
+                        <img src={media.link[0]} alt="AMERCIA" key={media.id} />
+                    ))}
+                </div>
                 {/* Update Form */}
                 {showForm && (
-                    <form onSubmit={() => updateProjectHandler(project.id)}>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            updateProjectHandler(project.id).then((r) =>
+                                console.log(r)
+                            );
+                        }}
+                    >
                         <input
                             type="text"
                             placeholder="Title"
-                            value={putTitle}
-                            onChange={titleChangeHandler}
+                            value={enteredTitle}
+                            onChange={(e) => setEnteredTitle(e.target.value)}
                         />
                         <select
                             placeholder="Category"
-                            value={putCategory}
-                            onChange={categoryChangeHandler}
+                            value={enteredCategory}
+                            onChange={(e) => setEnteredCategory(e.target.value)}
                         >
                             <option value="PHOTO">Photo</option>
                             <option value="VIDEO">Video</option>
@@ -158,13 +146,15 @@ export const ProjectDetails = () => {
                         <input
                             type="text"
                             placeholder="Description"
-                            value={putDescription}
-                            onChange={descriptionChangeHandler}
+                            value={enteredDescription}
+                            onChange={(e) =>
+                                setEnteredDescription(e.target.value)
+                            }
                         />
                         <select
                             placeholder="State"
-                            value={putState}
-                            onChange={stateChangeHandler}
+                            value={enteredState}
+                            onChange={(e) => setEnteredState(e.target.value)}
                         >
                             <option value="SAVE">Save</option>
                             <option value="PUBLISH">Hide</option>
