@@ -11,21 +11,21 @@ datasource db {
 }
 
 model Project {
-    id Int @default(autoincrement()) @id
-    createdAt DateTime @default(now())
-    title String
+    id          Int         @default(autoincrement()) @id
+    createdAt   DateTime    @default(now())
+    title       String
     description String?
-    state State @default(SAVE)
-    category Category @default(PHOTO)
-    media Media[]
+    state       State       @default(SAVE)
+    category    Category    @default(PHOTO)
+    media       Media[]
 }
 
 model Media {
-    id Int @default(autoincrement()) @id
-    link String[]
-    category Category @default(PHOTO)
-    project Project[] @relation(fields: [projectId], references: [id])
-    projectId Int
+    id          Int         @default(autoincrement()) @id
+    link        String[]
+    category    Category    @default(PHOTO)
+    project     Project[]   @relation(fields: [projectId], references: [id])
+    projectId   Int
 }
 
 enum Category {
@@ -42,9 +42,9 @@ enum State {
 }
 
 model User {
-    id Int @id @default(autoincrement())
-    email String @unique
-    username String @unique
-    password String
-    isAdmin Boolean @default(false)
+    id          Int     @id @default(autoincrement())
+    email       String  @unique
+    username    String  @unique
+    password    String
+    isAdmin     Boolean @default(false)
 }

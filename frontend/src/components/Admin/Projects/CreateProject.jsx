@@ -7,48 +7,29 @@ export const CreateProject = () => {
     const [enteredCategory, setEnteredCategory] = useState('PHOTO');
     const [enteredDescription, setEnteredDescription] = useState('');
     const [enteredState, setEnteredState] = useState('SAVE');
-    const [enteredPhotos, setEnteredPhotos] = useState([]);
-    // const [enteredVideos, setEnteredVideos] = useState([]);
+    const [enteredMedia, setEnteredMedia] = useState([]);
 
-    // Input Handlers
-    const titleChangeHandler = (e) => {
-        setEnteredTitle(e.target.value);
-    };
+    const submitHandler = async (e) => {
+        e.preventDefault();
 
-    const categoryChangeHandler = (e) => {
-        setEnteredCategory(e.target.value);
-    };
-
-    const descriptionChangeHandler = (e) => {
-        setEnteredDescription(e.target.value);
-    };
-
-    const stateChangeHandler = (e) => {
-        setEnteredState(e.target.value);
-    };
-
-    const photoChangeHandler = (e) => {
-        setEnteredPhotos(e.target.files[0]);
-    };
-
-    // const videoChangeHandler = (e) => {
-    //     setEnteredVideos(e.target.files[0]);
-    // };
-
-    // Submit Handlers
-    const submitHandler = async () => {
         const formData = new FormData();
 
         formData.append('title', enteredTitle);
         formData.append('category', enteredCategory);
         formData.append('description', enteredTitle);
         formData.append('state', enteredState);
-        formData.append('photo', enteredPhotos);
-        // formData.append('video', enteredVideos);
+
+        for (let file = 0; file < enteredMedia.length; file++) {
+            formData.append('media', enteredMedia[file]);
+        }
 
         await axios
-            .post('http://localhost:8000/projects/', formData)
-            .then(() => console.log('POSTING DATA'))
+            .post('http://localhost:8000/projects', formData)
+            .then(() => {
+                setEnteredTitle('');
+                setEnteredDescription('');
+                setEnteredMedia([]);
+            })
             .catch((err) => console.log(err));
     };
 
@@ -64,7 +45,9 @@ export const CreateProject = () => {
                             type="text"
                             name="title"
                             value={enteredTitle}
-                            onChange={titleChangeHandler}
+                            onChange={(e) => {
+                                setEnteredTitle(e.target.value);
+                            }}
                         />
                     </label>
                 </div>
@@ -75,7 +58,9 @@ export const CreateProject = () => {
                         <select
                             name="category"
                             value={enteredCategory}
-                            onChange={categoryChangeHandler}
+                            onChange={(e) => {
+                                setEnteredCategory(e.target.value);
+                            }}
                         >
                             <option disabled>Pick category</option>
                             <option value="PHOTO">Photo</option>
@@ -92,7 +77,9 @@ export const CreateProject = () => {
                             type="text"
                             name="description"
                             value={enteredDescription}
-                            onChange={descriptionChangeHandler}
+                            onChange={(e) => {
+                                setEnteredDescription(e.target.value);
+                            }}
                         />
                     </label>
                 </div>
@@ -103,7 +90,9 @@ export const CreateProject = () => {
                         <select
                             name="state"
                             value={enteredState}
-                            onChange={stateChangeHandler}
+                            onChange={(e) => {
+                                setEnteredState(e.target.value);
+                            }}
                         >
                             <option disabled>State</option>
                             <option value="SAVE">Save</option>
@@ -112,24 +101,21 @@ export const CreateProject = () => {
                         </select>
                     </label>
                 </div>
-                {/* Photo */}
+                {/* Media */}
                 <div>
-                    <label htmlFor="photo">
-                        <span>Photo</span>
+                    <label htmlFor="media">
+                        <span>Media</span>
                         <input
                             type="file"
-                            name="photo"
-                            onChange={(e) => photoChangeHandler(e)}
+                            multiple={true}
+                            name="media"
+                            onChange={(e) => {
+                                setEnteredMedia(e.target.files);
+                                console.log(enteredMedia);
+                            }}
                         />
                     </label>
                 </div>
-                {/* Video */}
-                {/* <label htmlFor="video">Video</label>
-                <input
-                    type="file"
-                    name="video"
-                    onChange={(e) => videoChangeHandler(e)}
-                /> */}
                 {/* Submit */}
                 <button type="submit">Save</button>
             </form>
